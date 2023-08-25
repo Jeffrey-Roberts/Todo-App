@@ -5,7 +5,7 @@ const TodoIndex: FC = () => {
   const [itemNameValue, setItemNameValue] = useState('');
 
   return (
-    <Container>
+    <Container aria-label="todo form">
       <Typography variant="h1" gutterBottom>
         Todo-App
       </Typography>
