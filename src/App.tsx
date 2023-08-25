@@ -9,16 +9,16 @@ const darkTheme = createTheme({
   },
 });
 
-export function App() {
+export const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
-}
+};
 
-export function WrappedApp() {
+export const WrappedApp = () => {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
@@ -27,4 +27,4 @@ export function WrappedApp() {
       </HashRouter>
     </ThemeProvider>
   );
-}
+};
