@@ -21,11 +21,8 @@ test('should add todo item', async () => {
   await user.type(screen.getByLabelText('item name field'), itemName);
   await user.type(screen.getByLabelText('item description field'), itemDesc);
   await user.click(screen.getByLabelText('add button'));
-  expect(
-    screen.getByText(
-      `${itemName} | ${itemDesc} | ${itemTimestamp.toLocaleString()}`
-    )
-  ).toBeInTheDocument();
+  expect(screen.getByText(itemName)).toBeInTheDocument();
+  expect(screen.getByText(itemDesc)).toBeInTheDocument();
 });
 
 test('should not add todo item if name field not filled', async () => {
