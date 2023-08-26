@@ -1,8 +1,21 @@
-import { FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Button, Container, Grid, TextField, Typography } from '@mui/material';
+import TodoItem from './TodoItem';
+import TodoList from './TodoList';
+import AddTodoItem from './AddTodoItem';
 
 const TodoIndex: FC = () => {
+  const [todoList, setTodoList] = useState<TodoItem[]>([]);
+
   const [itemNameValue, setItemNameValue] = useState('');
+  const [itemDescValue, setItemDescValue] = useState('');
+  const handleAddItem = (todoItem: TodoItem) => {
+    if (itemNameValue) {
+      setTodoList((prevState) => [...prevState, todoItem]);
+      setItemNameValue('');
+      setItemDescValue('');
+    }
+  };
 
   return (
     <Container aria-label="todo form">
@@ -16,39 +29,45 @@ const TodoIndex: FC = () => {
         alignItems="center"
         justifyContent="center"
       >
-        <Grid item xs={4} sx={{ height: '100%' }}>
+        <Grid item xs={12}>
           <TextField
+            value={itemNameValue}
             id="name"
             label="Name"
-            aria-label="item name"
             error={!itemNameValue}
             size="medium"
             onChange={(e) => setItemNameValue(e.target.value)}
             required
             fullWidth
-            InputProps={{
-              style: {
-                height: '100%',
-              },
+            autoFocus
+            inputProps={{
+              'aria-label': 'item name field',
             }}
           />
         </Grid>
 
-        <Grid item xs={8}>
+        <Grid item xs={12}>
           <TextField
+            value={itemDescValue}
             id="description"
             label="Description"
             aria-label="item description"
+            onChange={(e) => setItemDescValue(e.target.value)}
             multiline
-            rows={3}
+            rows={4}
             fullWidth
+            inputProps={{
+              'aria-label': 'item description field',
+            }}
           />
         </Grid>
 
         <Grid item xs={6}>
-          <Button variant="contained" fullWidth>
-            Add
-          </Button>
+          <AddTodoItem
+            name={itemNameValue}
+            description={itemDescValue}
+            handleAddItem={handleAddItem}
+          />
         </Grid>
         <Grid item xs={6}>
           <Button variant="contained" color="error" fullWidth>
@@ -56,6 +75,7 @@ const TodoIndex: FC = () => {
           </Button>
         </Grid>
       </Grid>
+      <TodoList todoItemList={todoList} />
     </Container>
   );
 };
