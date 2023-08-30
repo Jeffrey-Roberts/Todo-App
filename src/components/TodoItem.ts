@@ -5,9 +5,12 @@ export default class TodoItem {
 
   timestamp: Date;
 
+  completed: boolean;
+
   constructor(name: string, description?: string) {
     this.name = name;
     this.description = description;
     this.timestamp = new Date();
+    this.completed = false;
   }
 }
