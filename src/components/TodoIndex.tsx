@@ -1,8 +1,16 @@
 import React, { FC, useState } from 'react';
-import { Button, Container, Grid, TextField, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  TextField,
+  Typography,
+} from '@mui/material';
 import TodoItem from './TodoItem';
 import TodoList from './TodoList';
 import AddTodoItem from './AddTodoItem';
+import logo from '../assets/light-logo.png';
 
 const TodoIndex: FC = () => {
   const [todoList, setTodoList] = useState<TodoItem[]>([]);
@@ -19,9 +27,6 @@ const TodoIndex: FC = () => {
 
   return (
     <Container aria-label="todo form">
-      <Typography variant="h1" gutterBottom>
-        Todo-App
-      </Typography>
       <Grid
         sx={{ margin: 'auto' }}
         container
@@ -29,6 +34,14 @@ const TodoIndex: FC = () => {
         alignItems="center"
         justifyContent="center"
       >
+        <Grid item xs={4}>
+          <Box component="img" alt="Todo App Logo (Guillotine)" src={logo} />
+        </Grid>
+        <Grid item xs={8}>
+          <Typography variant="h1" gutterBottom>
+            Todo-App
+          </Typography>
+        </Grid>
         <Grid item xs={12}>
           <TextField
             value={itemNameValue}
@@ -74,8 +87,11 @@ const TodoIndex: FC = () => {
             Clear
           </Button>
         </Grid>
+
+        <Grid item xs={12}>
+          <TodoList todoItemList={todoList} />
+        </Grid>
       </Grid>
-      <TodoList todoItemList={todoList} />
     </Container>
   );
 };
