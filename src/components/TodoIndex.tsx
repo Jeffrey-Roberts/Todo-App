@@ -22,6 +22,7 @@ const TodoIndex: FC = () => {
       setTodoList((prevState) => [...prevState, todoItem]);
       setItemNameValue('');
       setItemDescValue('');
+      document.getElementById('name')?.focus();
     }
   };
 
