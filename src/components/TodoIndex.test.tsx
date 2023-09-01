@@ -34,3 +34,15 @@ test('should not add todo item if name field not filled', async () => {
   await user.click(screen.getByLabelText('add button'));
   expect(screen.queryByText(itemName)).not.toBeInTheDocument();
 });
+
+test('when delete action is pressed then todo item is removed', async () => {
+  render(<TodoIndex />);
+  const user = userEvent.setup();
+
+  await user.type(screen.getByLabelText('item name field'), 'Item');
+  await user.click(screen.getByLabelText('add button'));
+
+  await user.click(screen.getByLabelText('Delete button'));
+
+  expect(screen.getByText('No rows')).toBeInTheDocument();
+});

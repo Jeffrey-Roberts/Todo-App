@@ -78,6 +78,9 @@ const TodoIndex: FC = () => {
 
         <Grid item xs={6}>
           <AddTodoItem
+            id={
+              todoList.length === 0 ? 0 : todoList[todoList.length - 1].id + 1
+            }
             name={itemNameValue}
             description={itemDescValue}
             handleAddItem={handleAddItem}
@@ -90,7 +93,7 @@ const TodoIndex: FC = () => {
         </Grid>
 
         <Grid item xs={12}>
-          <TodoList todoItemList={todoList} />
+          <TodoList todoItemList={todoList} setTodoItemList={setTodoList} />
         </Grid>
       </Grid>
     </Container>
